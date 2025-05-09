@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import ciudadRoutes from "./src/routes/ciudadRoutes.js"
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 // Permite manejar cookies en las respuestas.
 app.use(cookieParser());
 // Rutas
+app.use('/api/ciudades', ciudadRoutes);
 
 // Puerto para ejecutar el servidor
 const port = process.env.PORT || 3000;

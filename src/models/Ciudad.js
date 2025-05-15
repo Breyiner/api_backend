@@ -16,12 +16,8 @@ class Ciudad {
         "SELECT * FROM ciudades WHERE id = ?",
         [id]
       );
-      if (rows.length === 0) {
-        // Retorna un array vacío si no se encuentra la ciudad
-        return [];
-      }
       // Retorna la ciudad encontrada
-      return rows[0];
+      return rows;
     } catch (error) {
       throw new Error("Error al obtener la ciudad");
     }
@@ -31,42 +27,36 @@ class Ciudad {
   async create(ciudad) {
     try {
       const [result] = await connection.query(
-        "INSERT INTO ciudades (ciudad) VALUES (?)",
+        "INSERT INTO ciudades (nombre) VALUES (?)",
         [ciudad]
       );
-      if (result.affectedRows === 0) {
-        return null; // Retorna null si no se pudo crear la ciudad
-      }
       // Retorna la nueva ciudad creada
-      return { id: result.insertId, ciudad };
+      return result;
     } catch (error) {
       throw new Error("Error al crear la Ciudad");
     }
   }
 
   // Método para actualizar una ciudades
-  async update(id, campos) {
+  async update(comando, parametros) {
     try {
-      let query = "UPDATE ciudades SET ";
-      let params = [];
+      const [result] = await connection.query(`UPDATE ciudades SET ${comando} WHERE id = ?`, parametros);
 
-      // Construimos dinámicamente la consulta de actualización solo con los campos proporcionados
-      for (const [key, value] of Object.entries(campos)) {
-        query += `${key} = ?, `;
-        params.push(value);
-      }
-
-      // Eliminamos la última coma y espacio de la consulta
-      query = query.slice(0, -2);
-
-      // Añadimos la condición WHERE para seleccionar el producto por su ID
-      query += " WHERE id = ?";
-      params.push(id);
-      const [result] = await connection.query(query, params);
-      return result.affectedRows > 0 ? { id, ...campos } : null;
+      return result;
     } catch (error) {
       throw new Error("Error al actualizar la ciudad");
     }
+  }
+
+  // Método para eliminar una ciudad
+  async delete(ciudadId) {
+    // Procedemos con la eliminación si no está relacionada
+    const [result] = await connection.query(
+      "DELETE FROM ciudades WHERE id = ?",
+      [ciudadId]
+    );
+
+    return result;
   }
 }
 

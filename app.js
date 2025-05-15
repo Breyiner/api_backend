@@ -4,8 +4,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-import ciudadRoutes from "./src/routes/ciudadRoutes.js"
-import generoRoutes from "./src/routes/generoRoutes.js"
+import ciudadRoutes from "./src/routes/ciudadRoutes.js";
+import generoRoutes from "./src/routes/generoRoutes.js";
+import lenguajeRoutes from "./src/routes/lenguajeRoutes.js";
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use(cookieParser());
 // Rutas
 app.use('/api/ciudades', ciudadRoutes);
 app.use('/api/generos', generoRoutes);
+app.use('/api/lenguajes', lenguajeRoutes);
 
 // Puerto para ejecutar el servidor
 const port = process.env.PORT || 3000;

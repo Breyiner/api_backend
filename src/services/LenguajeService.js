@@ -1,4 +1,5 @@
 import Lenguaje from "../models/Lenguaje.js";
+import LenguajeUsuario from "../models/LenguajeUsuario.js";
 
 class LenguajeService {
   static async getLenguajes()
@@ -151,16 +152,17 @@ class LenguajeService {
           message: "lenguaje no encontrado",
         };
       }
-      // // Consultamos los productos asociados a el lenguaje
-      // const productos = await categoriaInstance.productos(id);
-      // // Validamos si el lenguaje tiene productos asociados
-      // if (productos.length > 0) {
-      //   return {
-      //     error: true,
-      //     code: 400,
-      //     message: "No se puede eliminar el lenguaje, tiene productos asociados",
-      //   };
-      // }
+      const lenguajeUsuarioInstance = new LenguajeUsuario();
+      // Consultamos los usuarios asociados al lenguaje
+      const lenguajesUsuarios = await lenguajeUsuarioInstance.getByLenguajeId(id);
+      // Validamos si el lenguaje tiene usuarios asociados
+      if (lenguajesUsuarios.length > 0) {
+        return {
+          error: true,
+          code: 400,
+          message: "No se puede eliminar el lenguaje, tiene usuarios asociados",
+        };
+      }
       
       // Procedemos a eliminar el lenguaje      
       const resultado = await lenguajeInstance.delete(id); 

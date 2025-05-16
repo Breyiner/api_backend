@@ -24,6 +24,19 @@ class LenguajeUsuario {
     }
   }
 
+  async getByLenguajeId(lenguajeId) {
+    try {
+      const [rows] = await connection.query(
+        "SELECT * FROM lenguaje_usuario WHERE lenguaje_id = ?",
+        [lenguajeId]
+      );
+      // Retorna el usuario encontrado
+      return rows;
+    } catch (error) {
+      throw new Error("Error al obtener los lenguajes del usuario");
+    }
+  }
+
   // Método para crear un nuevo registro
   async create(campos, marcadores, parametros) {
     try {

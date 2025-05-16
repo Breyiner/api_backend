@@ -6,7 +6,7 @@ class UsuarioService {
   { 
     try {
       const usuarioInstance = new Usuario();
-      const usuarios = await usuarioInstance.getAll();
+      let usuarios = await usuarioInstance.getAll();
       
       // Validamos si no hay usuarios
       if (usuarios.length === 0) {
@@ -16,6 +16,20 @@ class UsuarioService {
           message: "No hay usuarios registrados",
         };
       }    
+
+      // consultamos los lenguajes del usuario
+      const lenguajeUsuarioInstance = new LenguajeUsuario();
+      
+      usuarios = await Promise.all(usuarios.map(async usuario => {
+        const lenguajesObtenidos = await lenguajeUsuarioInstance.getByUsuarioId(usuario.id);
+        // obtenemos el id de cada lenguaje del usuario
+        let lenguajes = lenguajesObtenidos.map(lenguaje => lenguaje.lenguaje_id);
+        console.log({ ...usuario, lenguajes });
+        
+        // reorganizamos el arreglo del usuario
+        return {...usuario, lenguajes}
+      }));
+
       // Retornamos los usuarios obtenidos
       return {
         error: false,
@@ -83,7 +97,7 @@ class UsuarioService {
         parametros.push(value);
       }
 
-      let idCiudad = campos.findIndex()
+      // let idCiudad = campos.findIndex()
       
       // se quitan las comas del final
       camposUsuario = camposUsuario.slice(0, -1);

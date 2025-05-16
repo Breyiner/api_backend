@@ -25,11 +25,11 @@ app.use(express.urlencoded({ extended: true }));
 // Permite manejar cookies en las respuestas.
 app.use(cookieParser());
 // Rutas
-app.use('/api/ciudades', ciudadRoutes);
-app.use('/api/generos', generoRoutes);
-app.use('/api/lenguajes', lenguajeRoutes);
-app.use('/api/usuarios', usuarioRoutes);
-app.use('/api/lenguaje_usuario', lenguajeUsuarioRoutes);
+app.use('/ciudades', ciudadRoutes);
+app.use('/generos', generoRoutes);
+app.use('/lenguajes', lenguajeRoutes);
+app.use('/usuarios', usuarioRoutes);
+app.use('/lenguaje_usuario', lenguajeUsuarioRoutes);
 
 // Puerto para ejecutar el servidor
 const port = process.env.PORT || 3000;

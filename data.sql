@@ -8,21 +8,21 @@ use bd_api;
 -- drop table if exists lenguajes;
 create table lenguajes (
 	id int unsigned auto_increment,
-    lenguaje varchar(30),
+    nombre varchar(30),
     primary key (id)
 );
 
 -- drop table if exists generos;
 create table generos (
 	id int unsigned auto_increment,
-    genero varchar(15),
+    nombre varchar(15),
     primary key (id)
 );
 
 -- drop table if exists ciudades;
 create table ciudades (
 	id int unsigned auto_increment,
-    ciudad varchar(50),
+    nombre varchar(50),
     primary key (id)
 );
 
@@ -35,21 +35,21 @@ create table usuarios (
     telefono int,
     usuario varchar(20) unique,
     contrasena varchar(20),
-    id_genero int unsigned,
-    id_ciudad int unsigned,
+    genero_id int unsigned,
+    ciudad_id int unsigned,
     primary key (id),
-    foreign key (id_genero) references generos(id),
-    foreign key (id_ciudad) references ciudades(id)
+    foreign key (genero_id) references generos(id),
+    foreign key (ciudad_id) references ciudades(id)
 );
 
 -- drop table if exists lenguaje_usuario;
 create table lenguaje_usuario (
 	id int auto_increment,
-	id_usuario int unsigned,
-    id_lenguaje int unsigned,
+	usuario_id int unsigned,
+    lenguaje_id int unsigned,
     primary key (id),
-    foreign key (id_usuario) references usuarios(id),
-    foreign key (id_lenguaje) references lenguajes(id)
+    foreign key (usuario_id) references usuarios(id),
+    foreign key (lenguaje_id) references lenguajes(id)
 );
 
 select * from lenguaje_usuario where 1 = 1;

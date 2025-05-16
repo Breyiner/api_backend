@@ -1,4 +1,5 @@
 import Ciudad from "../models/Ciudad.js";
+import Usuario from "../models/Usuario.js";
 
 class CiudadService {
   static async getCiudades()
@@ -152,16 +153,17 @@ class CiudadService {
           message: "ciudad no encontrada",
         };
       }
-      // // Consultamos los productos asociados a la ciudad
-      // const productos = await categoriaInstance.productos(id);
-      // // Validamos si la ciudad tiene productos asociados
-      // if (productos.length > 0) {
-      //   return {
-      //     error: true,
-      //     code: 400,
-      //     message: "No se puede eliminar la ciudad, tiene productos asociados",
-      //   };
-      // }
+      const usuarioInstance = new Usuario();
+      // Consultamos los usuarios asociados a la ciudad
+      const usuarios = await usuarioInstance.getByCiudadId(id);
+      // Validamos si la ciudad tiene usuarios asociados
+      if (usuarios.length > 0) {
+        return {
+          error: true,
+          code: 400,
+          message: "No se puede eliminar la ciudad, tiene usuarios asociados",
+        };
+      }
       
       // Procedemos a eliminar la ciudad      
       const resultado = await ciudadInstance.delete(id); 

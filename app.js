@@ -8,6 +8,7 @@ import ciudadRoutes from "./src/routes/ciudadRoutes.js";
 import generoRoutes from "./src/routes/generoRoutes.js";
 import lenguajeRoutes from "./src/routes/lenguajeRoutes.js";
 import usuarioRoutes from "./src/routes/usuarioRoutes.js";
+import lenguajeUsuarioRoutes from "./src/routes/lenguajeUsuarioRoutes.js";
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use('/api/ciudades', ciudadRoutes);
 app.use('/api/generos', generoRoutes);
 app.use('/api/lenguajes', lenguajeRoutes);
 app.use('/api/usuarios', usuarioRoutes);
+app.use('/api/lenguaje_usuario', lenguajeUsuarioRoutes);
 
 // Puerto para ejecutar el servidor
 const port = process.env.PORT || 3000;

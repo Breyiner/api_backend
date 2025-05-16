@@ -1,4 +1,5 @@
 import Usuario from "../models/Usuario.js";
+import LenguajeUsuario from "../models/LenguajeUsuario.js";
 
 class UsuarioService {
   static async getUsuarios()
@@ -34,7 +35,7 @@ class UsuarioService {
   static async getUsuarioById(id) {
     try {
       const usuarioInstance = new Usuario();
-      const usuario = await usuarioInstance.getById(id);
+      let usuario = await usuarioInstance.getById(id);
       // Validamos si no hay usuarios
       if (usuario.length === 0) {
         return {
@@ -43,12 +44,22 @@ class UsuarioService {
           message: "Usuario no encontrado",
         };
       }
+
+      // consultamos los lenguajes del usuario
+      const lenguajeUsuarioInstance = new LenguajeUsuario();
+      const lenguajesObtenidos = await lenguajeUsuarioInstance.getByUsuarioId(id);
+
+      // obtenemos el id de cada lenguaje del usuario
+      let lenguajes = lenguajesObtenidos.map(lenguaje => lenguaje.lenguaje_id);
+      
+      // reorganizamos el arreglo del usuario
+      usuario = {...usuario[0], lenguajes}
       // Retornamos el usuario obtenido
       return {
         error: false,
         code: 200,
         message: "Usuario obtenido correctamente",
-        data: usuario[0],
+        data: usuario,
       };
     } catch (error) {
       return {

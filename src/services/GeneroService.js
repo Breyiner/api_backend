@@ -1,4 +1,6 @@
 import Genero from "../models/Genero.js";
+import Usuario from "../models/Usuario.js";
+
 
 class GeneroService {
   static async getGeneros()
@@ -152,16 +154,18 @@ class GeneroService {
           message: "Genero no encontrado",
         };
       }
-      // // Consultamos los productos asociados a el genero
-      // const productos = await categoriaInstance.productos(id);
-      // // Validamos si el genero tiene productos asociados
-      // if (productos.length > 0) {
-      //   return {
-      //     error: true,
-      //     code: 400,
-      //     message: "No se puede eliminar el genero, tiene productos asociados",
-      //   };
-      // }
+
+      const usuarioInstance = new Usuario();
+      // Consultamos los usuarios asociados al genero
+      const usuarios = await usuarioInstance.getByGeneroId(id);
+      // Validamos si el genero tiene usuarios asociados
+      if (usuarios.length > 0) {
+        return {
+          error: true,
+          code: 400,
+          message: "No se puede eliminar el genero, tiene usuarios asociados",
+        };
+      }
       
       // Procedemos a eliminar el genero      
       const resultado = await generoInstance.delete(id); 

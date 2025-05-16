@@ -24,7 +24,6 @@ class UsuarioService {
         const lenguajesObtenidos = await lenguajeUsuarioInstance.getByUsuarioId(usuario.id);
         // obtenemos el id de cada lenguaje del usuario
         let lenguajes = lenguajesObtenidos.map(lenguaje => lenguaje.lenguaje_id);
-        console.log({ ...usuario, lenguajes });
         
         // reorganizamos el arreglo del usuario
         return {...usuario, lenguajes}

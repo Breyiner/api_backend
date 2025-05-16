@@ -42,8 +42,8 @@ create table usuarios (
     foreign key (ciudad_id) references ciudades(id)
 );
 
--- drop table if exists lenguaje_usuario;
-create table lenguaje_usuario (
+-- drop table if exists lenguajes_usuarios;
+create table lenguajes_usuarios (
 	id int auto_increment,
 	usuario_id int unsigned,
     lenguaje_id int unsigned,
@@ -52,7 +52,7 @@ create table lenguaje_usuario (
     foreign key (lenguaje_id) references lenguajes(id)
 );
 
-select * from lenguaje_usuario where 1 = 1;
+select * from lenguajes_usuarios where 1 = 1;
 
 insert into ciudades (ciudad) values ('Bucaramanga'), ('Floridablanca'), ('Girón'), ('Piedecuesta'), ('Lebrija');
 

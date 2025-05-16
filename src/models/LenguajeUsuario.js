@@ -4,7 +4,7 @@ import Lenguaje from "./Lenguaje.js";
 class LenguajeUsuario {
   async getAll() {
     try {
-      const [rows] = await connection.query("SELECT * FROM lenguaje_usuario");
+      const [rows] = await connection.query("SELECT * FROM lenguajes_usuarios");
       return rows;
     } catch (error) {
       throw new Error("Error al obtener los lenguajes de los usuarios");
@@ -14,7 +14,7 @@ class LenguajeUsuario {
   async getByUsuarioId(usuarioId) {
     try {
       const [rows] = await connection.query(
-        "SELECT * FROM lenguaje_usuario WHERE usuario_id = ?",
+        "SELECT * FROM lenguajes_usuarios WHERE usuario_id = ?",
         [usuarioId]
       );
       // Retorna el usuario encontrado
@@ -27,7 +27,7 @@ class LenguajeUsuario {
   async getByLenguajeId(lenguajeId) {
     try {
       const [rows] = await connection.query(
-        "SELECT * FROM lenguaje_usuario WHERE lenguaje_id = ?",
+        "SELECT * FROM lenguajes_usuarios WHERE lenguaje_id = ?",
         [lenguajeId]
       );
       // Retorna el usuario encontrado
@@ -41,7 +41,7 @@ class LenguajeUsuario {
   async create(campos, marcadores, parametros) {
     try {
       const [result] = await connection.query(
-        `INSERT INTO lenguaje_usuario (${campos}) VALUES (${marcadores})`,
+        `INSERT INTO lenguajes_usuarios (${campos}) VALUES (${marcadores})`,
         parametros
       );
       // Retorna el nuevo registro creado
@@ -54,7 +54,7 @@ class LenguajeUsuario {
 //   // Método para actualizar un lenguaje del usuario
 //   async updateByUserId(comando, parametros) {
 //     try {
-//       const [result] = await connection.query(`UPDATE lenguaje_usuario SET ${comando} WHERE usuario_id = ?`, parametros);
+//       const [result] = await connection.query(`UPDATE lenguajes_usuarios SET ${comando} WHERE usuario_id = ?`, parametros);
 
 //       return result;
 //     } catch (error) {
@@ -66,7 +66,7 @@ class LenguajeUsuario {
   async deleteByUserId(usuarioId) {
     // Procedemos con la eliminación si no está relacionada
     const [result] = await connection.query(
-      "DELETE FROM lenguaje_usuario WHERE usuario_id = ?",
+      "DELETE FROM lenguajes_usuarios WHERE usuario_id = ?",
       [usuarioId]
     );
 

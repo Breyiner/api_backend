@@ -36,6 +36,7 @@ class UsuarioController {
     try {
       // Llamamos al servicio para obtener el usuario por su ID
       const response = await UsuarioService.getUsuarioById(id);
+      
       if (response.error) {
         // Llamamos el provider para centralizar los mensajes de respuesta
         return ResponseProvider.error(

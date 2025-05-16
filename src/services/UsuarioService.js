@@ -82,6 +82,8 @@ class UsuarioService {
         marcadores += "?,";
         parametros.push(value);
       }
+
+      let idCiudad = campos.findIndex()
       
       // se quitan las comas del final
       camposUsuario = camposUsuario.slice(0, -1);

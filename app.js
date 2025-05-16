@@ -29,7 +29,7 @@ app.use('/ciudades', ciudadRoutes);
 app.use('/generos', generoRoutes);
 app.use('/lenguajes', lenguajeRoutes);
 app.use('/usuarios', usuarioRoutes);
-app.use('/lenguaje_usuario', lenguajeUsuarioRoutes);
+app.use('/lenguajes_usuarios', lenguajeUsuarioRoutes);
 
 // Puerto para ejecutar el servidor
 const port = process.env.PORT || 3000;

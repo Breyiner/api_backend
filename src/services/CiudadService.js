@@ -180,7 +180,7 @@ class CiudadService {
         error: false,
         code: 200,
         message: "Ciudad eliminada correctamente",
-        data: ciudadExistente,
+        data: ciudadExistente[0],
       };
     } catch (error) {
       return {

@@ -31,8 +31,8 @@ create table usuarios (
 	id int unsigned auto_increment,
     nombre varchar(30),
     apellido varchar(30),
-    documento int unique not null,
-    telefono int,
+    documento bigint unique not null,
+    telefono bigint,
     usuario varchar(20) unique,
     contrasena varchar(20),
     genero_id int unsigned,
@@ -54,8 +54,8 @@ create table lenguajes_usuarios (
 
 select * from lenguajes_usuarios where 1 = 1;
 
-insert into ciudades (ciudad) values ('Bucaramanga'), ('Floridablanca'), ('Girón'), ('Piedecuesta'), ('Lebrija');
+insert into ciudades (nombre) values ('Bucaramanga'), ('Floridablanca'), ('Girón'), ('Piedecuesta'), ('Lebrija');
 
-insert into generos (genero) values ('Masculino'), ('Femenino'), ('Otro');
+insert into generos (nombre) values ('Masculino'), ('Femenino'), ('Otro');
 
-insert into lenguajes (lenguaje) values ('JAVA'), ('.NET'), ('Python'), ('JavaScript'), ('SQL'), ('PHP');
+insert into lenguajes (nombre) values ('JAVA'), ('.NET'), ('Python'), ('JavaScript'), ('SQL'), ('PHP');

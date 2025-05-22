@@ -1,5 +1,6 @@
 import Usuario from "../models/Usuario.js";
 import LenguajeUsuario from "../models/LenguajeUsuario.js";
+import { ResponseProvider } from "../providers/ResponseProvider.js";
 
 class UsuarioService {
   static async getUsuarios()
@@ -85,6 +86,29 @@ class UsuarioService {
 
   static async createUsuario(campos) {
     try {
+      
+      const usuarioInstance = new Usuario();
+      const usuarios = await usuarioInstance.getAll();
+
+      let errors = [];
+      for (const usuario of usuarios) {
+        if (usuario.documento == campos.documento) {
+          return {
+            error: true,
+            code: 400,
+            message: "El documento ya existe",
+          };
+        }
+        if (usuario.usuario == campos.usuario) {
+          return {
+            error: true,
+            code: 400,
+            message: "El nombre de usuario ya existe",
+          };
+        }
+      }
+
+
       // Se obtienen los campos, la cantidad de marcadores y los parametros para crear el usuario
       let camposUsuario = "";
       let marcadores = "";
@@ -102,7 +126,6 @@ class UsuarioService {
       camposUsuario = camposUsuario.slice(0, -1);
       marcadores = marcadores.slice(0, -1);
 
-      const usuarioInstance = new Usuario();
       const usuarioCreado = await usuarioInstance.create(camposUsuario,marcadores,parametros);
       // Validamos si no se pudo crear el usuario
       if (usuarioCreado.affectedRows === 0) {
@@ -121,6 +144,8 @@ class UsuarioService {
         data: { id: usuarioCreado.insertId, ...campos },
       };
     } catch (error) {
+      console.log(error);
+      
       return {
         error: true,
         code: 500,

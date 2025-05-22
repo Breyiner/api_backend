@@ -18,7 +18,7 @@ export const camposLenguajeUsuario = (req, res, next) => {
     // Capturamos el valor del campo del body de la petición
     const value = req.body[name];
     // Validar si el campo es requerido y está vacío
-    if (required && (!value || value.trim() === "")) {
+    if (required && (!value)) {
       errors.push({
         campo: name,
         message: `El campo ${name} es obligatorio y no puede estar vacío.`,

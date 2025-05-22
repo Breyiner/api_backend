@@ -90,20 +90,19 @@ class UsuarioService {
       const usuarioInstance = new Usuario();
       const usuarios = await usuarioInstance.getAll();
 
-      let errors = [];
       for (const usuario of usuarios) {
         if (usuario.documento == campos.documento) {
           return {
             error: true,
             code: 400,
-            message: "El documento ya existe",
+            message: "El documento ingresado ya se encuntra registrado",
           };
         }
         if (usuario.usuario == campos.usuario) {
           return {
             error: true,
             code: 400,
-            message: "El nombre de usuario ya existe",
+            message: "El nombre de usuario ingresado ya se encuntra registrado",
           };
         }
       }

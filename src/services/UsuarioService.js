@@ -167,19 +167,23 @@ class UsuarioService {
         };
       }
 
-      if (campos.documento && (usuarioExistente.documento == campos.documento)) {
-        return {
-          error: true,
-          code: 400,
-          message: "El documento ingresado ya se encuentra registrado",
-        };
-      }
-      if (campos.usuario && (usuarioExistente.usuario == campos.usuario)) {
-        return {
-          error: true,
-          code: 400,
-          message: "El nombre de usuario ingresado ya se encuentra registrado",
-        };
+      const usuarios = await usuarioInstance.getAll();
+
+      for (const usuario of usuarios) {
+        if (usuario.documento == campos.documento) {
+          return {
+            error: true,
+            code: 400,
+            message: "El documento ingresado ya se encuentra registrado",
+          };
+        }
+        if (usuario.usuario == campos.usuario) {
+          return {
+            error: true,
+            code: 400,
+            message: "El nombre de usuario ingresado ya se encuentra registrado",
+          };
+        }
       }
 
       let comando = "";

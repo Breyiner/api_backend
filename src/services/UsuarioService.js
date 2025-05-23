@@ -1,6 +1,7 @@
 import Usuario from "../models/Usuario.js";
 import LenguajeUsuario from "../models/LenguajeUsuario.js";
-import { ResponseProvider } from "../providers/ResponseProvider.js";
+import Genero from "../models/Genero.js";
+import Ciudad from "../models/Ciudad.js";
 
 class UsuarioService {
   static async getUsuarios()
@@ -167,9 +168,34 @@ class UsuarioService {
         };
       }
 
+      const { genero_id, ciudad_id } = campos;
+
+      const generoInstance = new Genero();
+      const generoExistente = await generoInstance.getById(genero_id);
+      if (genero_id && generoExistente.length === 0) {
+        return {
+          error: true,
+          code: 404,
+          message: "Genero no encontrado",
+        };
+      }
+
+      const ciudadInstance = new Ciudad();
+      const ciudadExistente = await ciudadInstance.getById(ciudad_id);
+      if (ciudad_id && ciudadExistente.length === 0) {
+        return {
+          error: true,
+          code: 404,
+          message: "Ciudad no encontrada",
+        };
+      }
+
       const usuarios = await usuarioInstance.getAll();
 
-      for (const usuario of usuarios) {
+      const usuariosExistentes = usuarios.filter(usuario => usuario.id != id);
+      
+
+      for (const usuario of usuariosExistentes) {
         if (usuario.documento == campos.documento) {
           return {
             error: true,

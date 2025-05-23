@@ -1,3 +1,3 @@
 export const campos = [
-  { name: "nombre", required: true, minLength: 1, maxLength: 50 }
+  { name: "nombre", required: true, minLength: 1, maxLength: 30 }
 ];

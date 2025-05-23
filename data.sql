@@ -15,14 +15,14 @@ create table lenguajes (
 -- drop table if exists generos;
 create table generos (
 	id int unsigned auto_increment,
-    nombre varchar(15),
+    nombre varchar(30),
     primary key (id)
 );
 
 -- drop table if exists ciudades;
 create table ciudades (
 	id int unsigned auto_increment,
-    nombre varchar(50),
+    nombre varchar(30),
     primary key (id)
 );
 

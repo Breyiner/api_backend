@@ -95,14 +95,14 @@ class UsuarioService {
           return {
             error: true,
             code: 400,
-            message: "El documento ingresado ya se encuntra registrado",
+            message: "El documento ingresado ya se encuentra registrado",
           };
         }
         if (usuario.usuario == campos.usuario) {
           return {
             error: true,
             code: 400,
-            message: "El nombre de usuario ingresado ya se encuntra registrado",
+            message: "El nombre de usuario ingresado ya se encuentra registrado",
           };
         }
       }
@@ -164,6 +164,21 @@ class UsuarioService {
           error: true,
           code: 404,
           message: "Usuario no encontrado",
+        };
+      }
+
+      if (campos.documento && (usuarioExistente.documento == campos.documento)) {
+        return {
+          error: true,
+          code: 400,
+          message: "El documento ingresado ya se encuentra registrado",
+        };
+      }
+      if (campos.usuario && (usuarioExistente.usuario == campos.usuario)) {
+        return {
+          error: true,
+          code: 400,
+          message: "El nombre de usuario ingresado ya se encuentra registrado",
         };
       }
 
